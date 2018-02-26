@@ -1,0 +1,45 @@
+{
+  "name": "coinjs-lib",
+  "version": "1.0.0",
+  "description": "Server-side Cryptocurrency JavaScript library",
+  "main": "./src/index.js",
+  "engines": {
+    "node": ">=7.0.0"
+  },
+  "keywords": [
+    "bitcoinjs",
+    "bitcoin",
+    "javascript",
+    "coinjs",
+    "altcoinjs",
+    "ethereumjs"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bitclimb/coinjs-lib.git"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "bchaddrjs": "^0.2.0",
+    "bech32": "^1.1.2",
+    "bigi": "^1.4.0",
+    "bip39": "^2.5.0",
+    "bip66": "^1.1.0",
+    "bitcoin-ops": "^1.3.0",
+    "bs58check": "^2.0.0",
+    "ecurve": "^1.0.0",
+    "elliptic": "^6.4.0",
+    "ethereumjs-util": "^5.1.4",
+    "merkle-lib": "^2.0.10",
+    "pushdata-bitcoin": "^1.0.1",
+    "typeforce": "^1.11.3",
+    "varuint-bitcoin": "^1.0.4",
+    "wif": "^2.0.1"
+  },
+  "license": "MIT"
+}
