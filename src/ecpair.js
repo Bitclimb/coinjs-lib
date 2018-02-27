@@ -1,15 +1,11 @@
 const baddress = require('./address');
 const bcrypto = require('./crypto');
 const ecdsa = require('./ecdsa');
-
-const { pubToAddress, isValidAddress, isValidPrivate } = require('ethereumjs-util');
 const typeforce = require('typeforce');
 const types = require('./types');
 const wif = require('wif');
-
 const NETWORKS = require('./networks');
 const BigInteger = require('bigi');
-
 const ecurve = require('ecurve');
 const secp256k1 = ecdsa.__curve;
 
@@ -53,9 +49,9 @@ class ECPair {
     if (coin !== 'eth') {
       address = baddress.toBase58Check(bcrypto.hash160(this.getPublicKeyBuffer()), this.getNetwork().pubKeyHash);
     } else {
-      address = pubToAddress(baddress.bip32PublicToEthereumPublic(this.getPublicKeyBuffer()));
+      address = baddress.ethpubToAddress(baddress.bip32PublicToEthereumPublic(this.getPublicKeyBuffer()));
       address = `0x${address.toString('hex')}`;
-      if (!isValidAddress(address)) {
+      if (!baddress.isValidEthAddress(address)) {
         throw new Error('Invalid Ethereum address');
       }
     }

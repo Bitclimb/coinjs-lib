@@ -1,6 +1,7 @@
 const bech32 = require('bech32');
 const bs58check = require('bs58check');
 const bchaddr = require('bchaddrjs');
+const ethjs = require('ethereumjs-util');
 const ec = require('elliptic').ec('secp256k1');
 const bscript = require('./script');
 const btemplates = require('./templates');
@@ -98,6 +99,14 @@ function bip32PublicToEthereumPublic (pubKey) {
   let key = ec.keyFromPublic(pubKey).getPublic().toJSON();
   return Buffer.concat([padTo32(Buffer.from(key[0].toArray())), padTo32(Buffer.from(key[1].toArray()))]);
 }
+
+function isValidBchAddress (address) {
+  try {
+    return bchaddr.isLegacyAddress(address) || bchaddr.isBitpayAddress(address) || bchaddr.isCashAddress(address);
+  } catch (e) {
+    return false;
+  }
+}
 module.exports = {
   fromBase58Check,
   fromBech32,
@@ -108,5 +117,9 @@ module.exports = {
   toCashAddress: bchaddr.toCashAddress,
   toBtcAddress: bchaddr.toLegacyAddress,
   toBitpayAddress: bchaddr.toBitpayAddress,
-  bip32PublicToEthereumPublic
+  isValidBchAddress,
+  bip32PublicToEthereumPublic,
+  ethpubToAddress: ethjs.pubToAddress,
+  isValidEthAddress: ethjs.isValidAddress,
+  isValidEthPrivate: ethjs.isValidPrivate
 };
